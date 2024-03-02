@@ -9,35 +9,40 @@ public class BreadthFirstSearch {
     public static int[] bfs(int[][] graph) {
 
         // Create a Queue and add the first node (0) to it. Use your Queue class that you just created!
+        CISQueue<Integer> queue = new CISQueue<>(0);
 
         // Create a visited array. This array will track whether we have visited a specific node.
+        boolean[] visited = new boolean[graph.length];
 
         // Create a bfs path array and a bfs path index. This array will track the order that the nodes were visited.
+        int[] path = new int[graph.length];
+        int index = 0;
 
         // Add the first node (0) to the bfs array.
+        path[0] = 0;
 
         // Record the first node (0) as visited.
+        visited[0] = true;
         
         // Time to traverse the graph! While the queue is not empty ...
-
+        while(!queue.isEmpty()) {
             // Dequeue (poll) the queue and store this value in a variable called currentNode.
+            int currentNode = queue.dequeue();
 
             // Record this node as visited.
+            visited[currentNode] = true;
+            path[index++] = currentNode;
 
-            // Add this node to the path and update the path index.
-
-            // Obtain an array of this node's neighbouring/adjacent nodes.
-        
-            // Explore the current nodes neighbouring nodes. For each neighbouring node ...
-
-                // If a neighbour hasn't been visited before ...
-
-                    // Record the neighbour as visited.
-        
-                    // Add the neighbour to the queue. 
-
-        // Return bfs path.
-        
-        return null;
+            // Explore the current nodes neighbouring nodes.
+            // For each neighbouring node ...
+            for(int neighbour: graph[currentNode]) {
+                // Store the neighbour in a variable called neighbour.
+                // If neighbour hasn't been visited before ...
+                if (!visited[neighbour]){
+                    queue.enqueue(neighbour);
+                }
+            }
+        }
+        return path;
     }
 }
